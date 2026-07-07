@@ -51,11 +51,14 @@ p {
 /* 开始探索按钮：黑底、红字、红色边框 */
 #explore-btn {
     background-color: #000000;
-    color: #ff2222;
     border: 2px solid #ff2222;
-    padding: 10px 22px;
-    font-size: 16px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #explore-btn:hover {
     background: #111;
@@ -111,16 +114,23 @@ p {
 <body>
 <div class="title-main">寻找BATMAN</div>
 
-<p>2010年7月，你开玩笑般发了一则蝙蝠侠是否换人的帖子，引发了大量讨论。</p>
+<p>2010年7月，你开玩笑般发布了一则蝙蝠侠是否换人的帖子，引发了大量讨论。</p>
+    <p>在这些留言中，你发现某个神秘的账号。随着你的继续探索，你发觉有关蝙蝠侠的事情可能并不简单。</p>
 
-<p>你可以在下方检索框输入关键词调取相关内容，也可以点击个人主页进行查看。
-你要做的事就是试着从文本里寻找线索词条，一步步拼凑真相。</p>
+<p>你可以在下方检索框输入关键词在互联网快速检索，也可以通过浏览你的个人主页进行查看。
+   <p> 在你的个人主页里，你可以点击给你留言的账号进行Ta主页的查看。</p>
+<p>你要做的事就是从文本里寻找线索词条，推理得到假设和真相。</p>
 
 <a class="homepage-link" href="home.html">点击进入个人主页</a>
 
 <div class="search-area">
     <input id="search-input" placeholder="在此输入关键词检索档案">
-    <button id="explore-btn">开始探索</button>
+    <button id="explore-btn"> 
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ff2222" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    </button>
 </div>
 
 <!-- 新增Real Batman输入栏目 -->

@@ -152,8 +152,7 @@ p {
 后续可在这里写入密码、隐藏页面地址、伏笔
 -->
 
-<script>
-// 在这里添加你后续需要的【关键词-对应网页】映射
+<script>// 在这里添加你后续需要的【关键词-对应网页】映射
 const keywordJump = {
     "蝙蝠侠": "batman.html",
     "换人": "change.html",
@@ -193,8 +192,8 @@ const banPageUrl = "blank.html";
 
 batSubmitBtn.onclick = function(){
     let userText = batInput.value.trim();
-    // 模糊匹配包含「布鲁斯是蝙蝠侠」就触发警告
-    if(userText.includes("布鲁斯是蝙蝠侠")){
+    // 只要包含 布鲁斯 或者 蝙蝠侠 任意一个词就触发警告
+    if(userText.includes("布鲁斯") || userText.includes("蝙蝠侠")){
         warnCount += 1;
         sessionStorage.setItem("warnCount", warnCount);
         switch(warnCount){

@@ -150,13 +150,15 @@ p {
     制作：LK411、GITHUB、豆包<br>
 </div>
 
-<!--
-【隐藏线索 仅查看网页源代码可见】
-后续可在这里写入密码、隐藏页面地址、伏笔
--->
+<!-- 弹窗DOM先写在页面里 -->
+<div id="mask" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;"></div>
+<div id="myAlert" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:32px 40px;border-radius:16px;z-index:1000;min-width:320px;">
+    <p id="alertText" style="font-size:22px;margin:0 0 30px 0;"></p>
+    <button id="alertBtn" style="display:block;margin:0 auto;border:none;background:#1677ff;color:#fff;padding:10px 36px;border-radius:99px;font-size:18px;cursor:pointer;">确定</button>
+</div>
 
 <script>
-// 自定义弹窗函数，名字叫showTip，全程不使用alert
+// 仅定义弹窗函数，不获取DOM元素
 function showTip(msg) {
     const mask = document.getElementById('mask');
     const box = document.getElementById('myAlert');
@@ -165,17 +167,8 @@ function showTip(msg) {
     mask.style.display = 'block';
     box.style.display = 'block';
 }
-// 弹窗关闭逻辑绑定一次即可
-document.getElementById('alertBtn').onclick = function(){
-    document.getElementById('mask').style.display = 'none';
-    document.getElementById('myAlert').style.display = 'none';
-}
-document.getElementById('mask').onclick = function(){
-    document.getElementById('mask').style.display = 'none';
-    document.getElementById('myAlert').style.display = 'none';
-}
 
-// 在这里添加你后续需要的【关键词-对应网页】映射
+// 关键词跳转映射
 const keywordJump = {
     "蝙蝠侠": "batman.html",
     "换人": "change.html",
@@ -185,7 +178,7 @@ const keywordJump = {
 const inputDom = document.getElementById('search-input');
 const btnDom = document.getElementById('explore-btn');
 
-// 点击按钮检索
+// 检索按钮点击
 btnDom.onclick = function(){
     let word = inputDom.value.trim();
     if(keywordJump[word]){
@@ -194,13 +187,12 @@ btnDom.onclick = function(){
         showTip("未检索到相关档案，请更换关键词");
     }
 }
-// 回车直接搜索
+// 检索回车
 inputDom.onkeydown = function(e){
     if(e.key === "Enter") btnDom.click();
 }
 
-// ============ 新增：Real Batman 输入+警告封禁逻辑 ============
-// 读取警告次数，页面刷新不会清零
+// 警告次数初始化
 if(!localStorage.getItem("warnCount")){
     localStorage.setItem("warnCount", 0);
 }
@@ -208,11 +200,10 @@ let warnCount = Number(localStorage.getItem("warnCount"));
 
 const batInput = document.getElementById("bat-input");
 const batSubmitBtn = document.getElementById("bat-submit");
-// 正确答案跳转的结局页面文件名
 const endPageUrl = "ending.html";
-// 五次违规后跳转的封禁空白页
 const banPageUrl = "blank.html";
 
+// 提交按钮逻辑
 batSubmitBtn.onclick = function(){
     let userText = batInput.value.trim();
     if(userText.includes("布鲁斯") && userText.includes("蝙蝠侠")){
@@ -236,26 +227,30 @@ batSubmitBtn.onclick = function(){
                 break;
         }
     }
-    // else 直接删掉，不含违禁词什么都不做，不跳转结局
 }
-// 1、回车提交原有代码
+
+// 提交输入框回车
 batInput.onkeydown = function(e){
     if(e.key === "Enter") batSubmitBtn.click();
 }
 
-// 2、新增重置按钮点击绑定（必须写在这里）
+// 重置按钮逻辑
 document.getElementById('resetBtn').onclick = function(){
     localStorage.removeItem('warnCount');
     showTip('警告次数已重置，页面即将刷新');
     location.reload();
 }
 
+// 最后绑定弹窗关闭事件（此时DOM已经完全加载完毕）
+document.getElementById('alertBtn').onclick = function(){
+    document.getElementById('mask').style.display = 'none';
+    document.getElementById('myAlert').style.display = 'none';
+}
+document.getElementById('mask').onclick = function(){
+    document.getElementById('mask').style.display = 'none';
+    document.getElementById('myAlert').style.display = 'none';
+}
 </script>
 
-<div id="mask" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;"></div>
-<div id="myAlert" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:32px 40px;border-radius:16px;z-index:1000;min-width:320px;">
-    <p id="alertText" style="font-size:22px;margin:0 0 30px 0;"></p>
-    <button id="alertBtn" style="display:block;margin:0 auto;border:none;background:#1677ff;color:#fff;padding:10px 36px;border-radius:99px;font-size:18px;cursor:pointer;">确定</button>
-</div>
 </body>
 </html>

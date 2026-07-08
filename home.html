@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人主页</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    background:#000;
+    color:#fff;
+    font-family:system-ui,-apple-system,sans-serif;
+    max-width:600px;
+    margin:0 auto;
+    border-left:1px solid #333;
+    border-right:1px solid #333;
+    min-height:100vh;
+}
+/* 顶部个人信息栏 */
+.profile-header{
+    padding:16px;
+    border-bottom:1px solid #333;
+}
+.avatar{
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    background:#444;
+    margin-bottom:10px;
+}
+.username{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:4px;
+}
+.user-id{
+    color:#888;
+    margin-bottom:12px;
+}
+/* 推文Tab切换 */
+.tab-wrap{
+    display:flex;
+    border-bottom:1px solid #333;
+}
+.tab-item{
+    flex:1;
+    text-align:center;
+    padding:14px 0;
+    color:#aaa;
+    cursor:pointer;
+    position:relative;
+}
+.tab-item.active{
+    color:#fff;
+}
+.tab-item.active::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:50px;
+    height:4px;
+    background:#1d9bf0;
+    border-radius:2px;
+}
+/* 信息流容器 支持原生上下滑动 */
+.feed-box{
+    overflow-y:auto;
+    height:calc(100vh - 240px);
+}
+/* 单条推文卡片 */
+.tweet-card{
+    padding:14px 16px;
+    border-bottom:1px solid #333;
+    display:flex;
+    gap:12px;
+}
+.tweet-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#333;
+    flex-shrink:0;
+}
+.tweet-content{
+    flex:1;
+}
+.tweet-name-row{
+    display:flex;
+    gap:6px;
+    align-items:center;
+    margin-bottom:6px;
+}
+.tweet-name{
+    font-weight:bold;
+}
+.tweet-tag{
+    color:#888;
+}
+.tweet-text{
+    line-height:1.5;
+    font-size:15px;
+    color:#eee;
+}
+</style>
+</head>
+<body>
+<!-- 个人资料头部 -->
+<div class="profile-header">
+    <div class="avatar"></div>
+    <div class="username">你的账号名</div>
+    <div class="user-id">@userid123</div>
+    <p>这里写个人简介，仿X主页简介文案</p>
+</div>
+
+<!-- Tab栏 -->
+<div class="tab-wrap">
+    <div class="tab-item active">帖子</div>
+    <div class="tab-item">回复</div>
+    <div class="tab-item">媒体</div>
+    <div class="tab-item">喜欢</div>
+</div>
+
+<!-- 可上下滑动信息流区域 -->
+<div class="feed-box">
+    <!-- 单条留言/帖子卡片，复制多条就能无限滚动 -->
+    <div class="tweet-card">
+        <div class="tweet-avatar"></div>
+        <div class="tweet-content">
+            <div class="tweet-name-row">
+                <span class="tweet-name">访客A</span>
+                <span class="tweet-tag">@guest001 · 1小时</span>
+            </div>
+            <div class="tweet-text">第一条留言内容，你可以在这里填充剧情线索、伏笔文字</div>
+        </div>
+    </div>
+    <div class="tweet-card">
+        <div class="tweet-avatar"></div>
+        <div class="tweet-content">
+            <div class="tweet-name-row">
+                <span class="tweet-name">访客B</span>
+                <span class="tweet-tag">@guest002 · 3小时</span>
+            </div>
+            <div class="tweet-text">第二条留言，埋藏解谜关键信息，和主页面线索呼应</div>
+        </div>
+    </div>
+    <div class="tweet-card">
+        <div class="tweet-avatar"></div>
+        <div class="tweet-content">
+            <div class="tweet-name-row">
+                <span class="tweet-name">神秘账号</span>
+                <span class="tweet-tag">@secretxxx · 昨天</span>
+            </div>
+            <div class="tweet-text">隐藏剧情留言，放密码、隐藏页面地址这类线索</div>
+        </div>
+    </div>
+    <!-- 多复制几份卡片，内容越多滚动效果越明显 -->
+</div>
+</body>
+</html>

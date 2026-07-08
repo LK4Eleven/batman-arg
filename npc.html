@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPC用户主页</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    background:#ffffff;
+    color:#000000;
+    font-family:system-ui,-apple-system,sans-serif;
+    max-width:600px;
+    margin:0 auto;
+    border-left:1px solid #eee;
+    border-right:1px solid #eee;
+    min-height:100vh;
+}
+.back{
+    display:inline-block;
+    color:#1d9bf0;
+    text-decoration:none;
+    font-size:18px;
+    padding:12px 16px;
+}
+.profile-header{
+    padding:16px;
+    border-bottom:1px solid #eeeeee;
+}
+.avatar{
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    margin-bottom:10px;
+    background-size:cover;
+    background-position:center;
+}
+.username{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:4px;
+}
+.user-id{
+    color:#777777;
+    margin-bottom:12px;
+}
+.bio{
+    line-height:1.5;
+}
+.tab-wrap{
+    display:flex;
+    border-bottom:1px solid #eeeeee;
+}
+.tab-item{
+    flex:1;
+    text-align:center;
+    padding:14px 0;
+    color:#777;
+    cursor:pointer;
+    position:relative;
+}
+.tab-item.active{
+    color:#000;
+}
+.tab-item.active::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:50px;
+    height:4px;
+    background:#1d9bf0;
+    border-radius:2px;
+}
+.feed-box{
+    overflow:hidden;
+}
+.tweet-card{
+    padding:14px 16px;
+    border-bottom:1px solid #eeeeee;
+    display:flex;
+    gap:12px;
+}
+.tweet-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    flex-shrink:0;
+    background-size:cover;
+    background-position:center;
+}
+.tweet-content{
+    flex:1;
+}
+.tweet-name-row{
+    display:flex;
+    gap:6px;
+    align-items:center;
+    margin-bottom:6px;
+}
+.tweet-name{
+    font-weight:bold;
+}
+.tweet-tag{
+    color:#777777;
+    font-size:13px;
+}
+.tweet-text{
+    line-height:1.5;
+    font-size:15px;
+    color:#222222;
+}
+.tweet-text img{
+    max-width:100%;
+    margin-top:10px;
+    border-radius:4px;
+}
+.tab-panel{
+    display:none;
+}
+.tab-panel.show{
+    display:block;
+}
+.comment-wrap{
+    padding:0 16px 16px 76px;
+    border-bottom:1px solid #eee;
+    background:#fafafa;
+}
+.comment-item{
+    padding:10px 0;
+    display:flex;
+    gap:10px;
+}
+.comment-ava{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    flex-shrink:0;
+    background-size:cover;
+    background-position:center;
+}
+.comment-name{
+    font-weight:bold;
+    font-size:14px;
+}
+.comment-tag{
+    font-size:12px;
+    color:#888;
+    margin-left:4px;
+}
+.comment-txt{
+    font-size:14px;
+    margin-top:4px;
+    line-height:1.4;
+}
+.empty{
+    padding:40px 20px;
+    text-align:center;
+    color:#999;
+}
+.media-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    padding:8px;
+}
+.media-grid img{
+    width:100%;
+    border-radius:6px;
+    aspect-ratio:16/9;
+    object-fit:cover;
+}
+</style>
+</head>
+<body>
+<a class="back" onclick="history.back()">← 返回</a>
+
+<div class="profile-header">
+    <div class="avatar" id="uHead"></div>
+    <div class="username" id="uName"></div>
+    <div class="user-id" id="uId"></div>
+    <div class="bio" id="uBio"></div>
+</div>
+
+<div class="tab-wrap">
+    <div class="tab-item active" data-target="post">帖子</div>
+    <div class="tab-item" data-target="reply">回复</div>
+    <div class="tab-item" data-target="media">媒体</div>
+</div>
+
+<div class="feed-box">
+    <div class="tab-panel show" id="postBox"></div>
+    <div class="tab-panel" id="replyBox">
+        <div class="empty">暂无公开回复内容</div>
+    </div>
+    <div class="tab-panel" id="mediaBox">
+        <div class="media-grid" id="mediaWrap"></div>
+    </div>
+</div>
+
+<script src="./npc-data.js"></script>
+<script>
+function initUserInfo(){
+    const uData = randOne(NPC_DATA.userPool);
+    const avaSrc = randOne(NPC_DATA.avatarPool);
+    document.getElementById("uHead").style.background = `url(images/${avaSrc}) center/cover`;
+    document.getElementById("uName").innerText = uData.n;
+    document.getElementById("uId").innerText = uData.id;
+    document.getElementById("uBio").innerText = uData.bio;
+}
+
+function createPostBlock(){
+    const rawText = randOne(NPC_DATA.postText);
+    const finalText = renderAtLink(rawText);
+    const imgCfg = randOne(NPC_DATA.postImgConfig);
+    const postTime = randOne(NPC_DATA.timeList);
+    const authorAva = randOne(NPC_DATA.avatarPool);
+    let imgHtml = "";
+    if(imgCfg.type === 0){
+        imgHtml = `<img src="images/${imgCfg.local}">`;
+    }else{
+        imgHtml = `<img src="${imgCfg.url}" loading="lazy">`;
+    }
+    let commentHtml = "";
+    const commentCount = Math.floor(Math.random() * 3) + 1;
+    for(let i=0;i<commentCount;i++){
+        const cAva = randOne(NPC_DATA.avatarPool);
+        const cName = randOne(NPC_DATA.commentName);
+        const cRawTxt = randOne(NPC_DATA.commentText);
+        const cTxt = renderAtLink(cRawTxt);
+        const cTime = randOne(NPC_DATA.timeList);
+        commentHtml += `
+        <div class="comment-item">
+            <div class="comment-ava" style="background:url('images/${cAva}') center/cover;"></div>
+            <div>
+                <span class="comment-name">${cName}</span>
+                <span class="comment-tag">·${cTime}</span>
+                <div class="comment-txt">${cTxt}</div>
+            </div>
+        </div>`;
+    }
+    return `
+    <div class="tweet-card">
+        <div class="tweet-avatar" style="background:url('images/${authorAva}') center/cover;"></div>
+        <div class="tweet-content">
+            <div class="tweet-name-row">
+                <span class="tweet-name">${document.getElementById("uName").innerText}</span>
+                <span class="tweet-tag">${document.getElementById("uId").innerText} · ${postTime}</span>
+            </div>
+            <div class="tweet-text">
+                ${finalText}<br>
+                ${imgHtml}
+            </div>
+        </div>
+    </div>
+    <div class="comment-wrap">${commentHtml}</div>`;
+}
+
+function renderAllPosts(){
+    const container = document.getElementById("postBox");
+    let allHtml = "";
+    for(let i=0;i<4;i++) allHtml += createPostBlock();
+    container.innerHTML = allHtml;
+}
+
+function renderMediaGallery(){
+    const wrap = document.getElementById("mediaWrap");
+    const pickImgs = randomNoRepeat(NPC_DATA.mediaGallery,8);
+    let gridHtml = "";
+    pickImgs.forEach(url=>{
+        gridHtml += `<img src="${url}" loading="lazy">`;
+    });
+    wrap.innerHTML = gridHtml;
+}
+
+document.querySelectorAll(".tab-item").forEach(tab=>{
+    tab.onclick = ()=>{
+        document.querySelectorAll(".tab-item").forEach(t=>t.classList.remove("active"));
+        tab.classList.add("active");
+        const targetKey = tab.dataset.target;
+        document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("show"));
+        document.getElementById(targetKey + "Box").classList.add("show");
+    };
+});
+
+window.onload = ()=>{
+    initUserInfo();
+    renderAllPosts();
+    renderMediaGallery();
+}
+</script>
+</body>
+</html>

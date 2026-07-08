@@ -203,14 +203,20 @@ body{
     </div>
 </div>
 
+<!-- 保留外部JS数据源，完全不删除 -->
 <script src="npc-data.js"></script>
 <script>
 function initUserInfo(){
+    // 【固定三项：头像、用户名、账号ID，不从随机池读取】
+    // 固定头像：默认default.jpg
+    document.getElementById("uHead").style.background = `url(images/default.jpg) center/cover`;
+    // 固定显示用户名
+    document.getElementById("uName").innerText = "你找错了";
+    // 固定账号@后缀
+    document.getElementById("uId").innerText = "@bushizhongyaode";
+
+    // 简介bio依旧从npc-data随机获取，保留原有逻辑
     const uData = randOne(NPC_DATA.userPool);
-    const avaSrc = randOne(NPC_DATA.avatarPool);
-    document.getElementById("uHead").style.background = `url(images/${avaSrc}) center/cover`;
-    document.getElementById("uName").innerText = uData.n;
-    document.getElementById("uId").innerText = uData.id;
     document.getElementById("uBio").innerText = uData.bio;
 }
 

@@ -21,10 +21,10 @@ body{
     margin-bottom:20px;
     font-size:18px;
 }
-/* 原发主帖 */
+/* 原发主帖 底部自带灰色分割线，隔开主楼与评论 */
 .main-post{
     padding-bottom:24px;
-    border-bottom:1px solid #eee;
+    border-bottom:1px solid #eeeeee;
     margin-bottom:20px;
 }
 .avatar{
@@ -34,27 +34,53 @@ body{
     float:left;
     margin-right:12px;
     cursor:pointer;
+    background-size:cover;
+    background-position:center;
 }
 .info{
     overflow:hidden;
+    padding-top:4px;
 }
 .name{
     font-weight:bold;
     cursor:pointer;
+    display:inline-block;
 }
 .tag{
     font-size:13px;
     color:#777;
+    display:inline-block;
+    margin-left:6px;
 }
 .content{
     clear:both;
     margin-top:12px;
     line-height:1.6;
+    font-size:15px;
 }
-/* 单条评论 */
+.content img{
+    max-width:100%;
+    margin-top:10px;
+    border-radius:4px;
+}
+/* 单条评论 每条评论下方分割线 */
 .comment-item{
+    display:flex;
+    gap:12px;
     padding:14px 0;
     border-bottom:1px solid #f0f0f0;
+}
+.comment-item .avatar{
+    flex-shrink:0;
+    margin-right:0;
+}
+.comment-item .info{
+    flex:1;
+    overflow:hidden;
+}
+.comment-item .content{
+    clear:none;
+    margin-top:6px;
 }
 </style>
 </head>
@@ -65,8 +91,8 @@ body{
 <div class="main-post">
     <div class="avatar" onclick="location.href='home.html'" style="background:url('images/user.jpg') center/cover;"></div>
     <div class="info">
-        <div class="name" onclick="location.href='home.html'">WhatIF</div>
-        <div class="tag">@Message_WhatIf · 12小时</div>
+        <span class="name" onclick="location.href='home.html'">WhatIF</span>
+        <span class="tag">@Message_WhatIf · 12小时</span>
     </div>
     <div class="content">
         我说最近蝙蝠侠是不是换人了啊（doge）
@@ -77,11 +103,11 @@ body{
 <div class="comment-item">
     <div class="avatar" onclick="location.href='userA.html'" style="background:url('images/user (1).jpg') center/cover;"></div>
     <div class="info">
-        <div class="name" onclick="location.href='userA.html'">访客A</div>
-        <div class="tag">@guest001 · 12小时</div>
-    </div>
-    <div class="content">
-        嗯？
+        <span class="name" onclick="location.href='userA.html'">访客A</span>
+        <span class="tag">@guest001 · 12小时</span>
+        <div class="content">
+            嗯？
+        </div>
     </div>
 </div>
 
@@ -89,11 +115,11 @@ body{
 <div class="comment-item">
     <div class="avatar" onclick="location.href='userB.html'" style="background:url('images/user (2).jpg') center/cover;"></div>
     <div class="info">
-        <div class="name" onclick="location.href='userB.html'">访客B</div>
-        <div class="tag">@guest002 · 12小时</div>
-    </div>
-    <div class="content">
-        我好喜欢你对蝙蝠侠的看法！加个好友我仔细和你说说关于我的想法
+        <span class="name" onclick="location.href='userB.html'">访客B</span>
+        <span class="tag">@guest002 · 12小时</span>
+        <div class="content">
+            我好喜欢你对蝙蝠侠的看法！加个好友我仔细和你说说关于我的想法
+        </div>
     </div>
 </div>
 

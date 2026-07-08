@@ -21,11 +21,49 @@ body{
     margin-bottom:20px;
     font-size:18px;
 }
+/* 主楼容器，底部自带分割灰线 */
 .main-post{
     padding-bottom:24px;
     border-bottom:1px solid #eee;
     margin-bottom:20px;
 }
+/* 主楼头像样式 */
+.main-post .avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    float:left;
+    margin-right:12px;
+    cursor:pointer;
+    background-size:cover;
+    background-position:center;
+}
+.main-post .info{
+    overflow:hidden;
+    padding-top:4px;
+}
+.main-post .name{
+    font-weight:bold;
+    cursor:pointer;
+    display:inline-block;
+}
+.main-post .tweet-tag{
+    color:#888;
+    font-size:13px;
+    margin-left:6px;
+    display:inline-block;
+}
+.main-post .tweet-text{
+    clear:both;
+    margin-top:12px;
+    line-height:1.55;
+}
+.main-post .tweet-text img{
+    max-width:100%;
+    margin-top:10px;
+    border-radius:4px;
+}
+/* 评论区样式保留不变 */
 .comment-item {
     display: flex;
     gap: 12px;
@@ -66,16 +104,19 @@ body{
 <div class="main-post">
     <div class="avatar" onclick="location.href='home.html'" style="background:url('images/user.jpg') center/cover;"></div>
     <div class="info">
-        <div class="name" onclick="location.href='home.html'">WhatIF</div>
-            <span class="tweet-tag">@Message_WhatIf · 一天前</span>
-        </div>
-        <div class="tweet-text" style="margin-top:8px;">
-            我加了滤镜
-            <br>
-            <img src="images/batman (2).jpg" style="max-width:100%;margin-top:10px;border-radius:4px;">
-        </div>
+        <span class="name" onclick="location.href='home.html'">WhatIF</span>
+        <span class="tweet-tag">@Message_WhatIf · 一天前</span>
+    </div>
+    <div class="tweet-text">
+        我加了滤镜
+        <br>
+        <img src="images/batman (2).jpg" style="max-width:100%;margin-top:10px;border-radius:4px;">
     </div>
 </div>
+
+<!-- 下方直接粘贴你的评论comment-item区块即可 -->
+</body>
+</html>
 
 <!-- 原有你写好的评论直接粘贴在此处 -->
 </body>

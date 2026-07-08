@@ -203,16 +203,13 @@ body{
     </div>
 </div>
 
-<!-- 保留外部JS数据源，完全不删除 -->
+<!-- 保留外部数据源，完全不删除 -->
 <script src="npc-data.js"></script>
 <script>
 function initUserInfo(){
-    // 【固定三项：头像、用户名、账号ID，不从随机池读取】
-    // 固定头像：默认default.jpg
+    // 固定三项：头像、用户名、账号ID，不从随机池读取
     document.getElementById("uHead").style.background = `url(images/default.jpg) center/cover`;
-    // 固定显示用户名
     document.getElementById("uName").innerText = "你找错了";
-    // 固定账号@后缀
     document.getElementById("uId").innerText = "@bushizhongyaode";
 
     // 简介bio依旧从npc-data随机获取，保留原有逻辑
@@ -220,18 +217,30 @@ function initUserInfo(){
     document.getElementById("uBio").innerText = uData.bio;
 }
 
+// ========== 已经修改好自动艾特图片逻辑的createPostBlock函数 ==========
 function createPostBlock(){
     const rawText = randOne(NPC_DATA.postText);
-    const finalText = renderAtLink(rawText);
+    let finalText = renderAtLink(rawText);
     const imgCfg = randOne(NPC_DATA.postImgConfig);
     const postTime = randOne(NPC_DATA.timeList);
     const authorAva = randOne(NPC_DATA.avatarPool);
     let imgHtml = "";
+
+    let needAutoAt = false;
     if(imgCfg.type === 0){
         imgHtml = `<img src="images/${imgCfg.local}">`;
+        // 本地batman、supergirl配图 自动追加蓝名艾特
+        if(imgCfg.local.includes("batman") || imgCfg.local.includes("supergirl")){
+            needAutoAt = true;
+        }
     }else{
         imgHtml = `<img src="${imgCfg.url}" loading="lazy">`;
     }
+
+    if(needAutoAt){
+        finalText += "<br>" + renderAtLink("@Message_WhatIf");
+    }
+
     let commentHtml = "";
     const commentCount = Math.floor(Math.random() * 3) + 1;
     for(let i=0;i<commentCount;i++){

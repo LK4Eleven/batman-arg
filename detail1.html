@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>帖子详情</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    background:#fff;
+    max-width:600px;
+    margin:0 auto;
+    border-left:1px solid #eee;
+    border-right:1px solid #eee;
+    padding:16px;
+}
+.back{
+    display:inline-block;
+    color:#1d9bf0;
+    text-decoration:none;
+    margin-bottom:20px;
+    font-size:18px;
+}
+/* 原发主帖 */
+.main-post{
+    padding-bottom:24px;
+    border-bottom:1px solid #eee;
+    margin-bottom:20px;
+}
+.avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    float:left;
+    margin-right:12px;
+    cursor:pointer;
+}
+.info{
+    overflow:hidden;
+}
+.name{
+    font-weight:bold;
+    cursor:pointer;
+}
+.tag{
+    font-size:13px;
+    color:#777;
+}
+.content{
+    clear:both;
+    margin-top:12px;
+    line-height:1.6;
+}
+/* 单条评论 */
+.comment-item{
+    padding:14px 0;
+    border-bottom:1px solid #f0f0f0;
+}
+</style>
+</head>
+<body>
+<a class="back" onclick="history.back()">← 返回主页</a>
+
+<!-- 你自己发布的主帖子 -->
+<div class="main-post">
+    <div class="avatar" onclick="location.href='home.html'" style="background:url('images/user.jpg') center/cover;"></div>
+    <div class="info">
+        <div class="name" onclick="location.href='home.html'">WhatIF</div>
+        <div class="tag">@Message_WhatIf · 刚刚</div>
+    </div>
+    <div class="content">
+        201|Focus on my private|sharing Batman or other superhero/superheroine
+    </div>
+</div>
+
+<!-- 评论A -->
+<div class="comment-item">
+    <div class="avatar" onclick="location.href='userA.html'" style="background:url('images/user (1).jpg') center/cover;"></div>
+    <div class="info">
+        <div class="name" onclick="location.href='userA.html'">访客A</div>
+        <div class="tag">@guest001 · 12小时</div>
+    </div>
+    <div class="content">
+        嗯？
+    </div>
+</div>
+
+<!-- 评论B -->
+<div class="comment-item">
+    <div class="avatar" onclick="location.href='userB.html'" style="background:url('images/user (2).jpg') center/cover;"></div>
+    <div class="info">
+        <div class="name" onclick="location.href='userB.html'">访客B</div>
+        <div class="tag">@guest002 · 12小时</div>
+    </div>
+    <div class="content">
+        我好喜欢你对蝙蝠侠的看法！加个好友我仔细和你说说关于我的想法
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>当期任务</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: rgba(0,0,0,0.75);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pop-box{
+    background: #1e1e1e;
+    border: 1px solid #444;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 520px;
+    padding: 28px;
+}
+.pop-title{
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+.pop-content{
+    color: #dddddd;
+    line-height: 1.7;
+    font-size: 15px;
+    margin-bottom: 26px;
+}
+.close-btn{
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #ff2222;
+    background: #000;
+    color: #ff2222;
+    padding: 8px 30px;
+    border-radius: 99px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="pop-box">
+    <div class="pop-title">当前版本主线任务</div>
+    <div class="pop-content">
+找到他是谁
+    </div>
+    <button class="close-btn" onclick="history.back()">关闭</button>
+</div>
+</body>
+</html>

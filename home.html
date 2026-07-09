@@ -353,7 +353,14 @@ const msgList = [
 function renderMsg() {
     const wrap = document.getElementById("msgContainer");
     let html = "";
-    msgList.forEach(item => {
+
+    const sortedList = [...msgList].sort((a, b) => {
+        const timeA = a.days * 24 + a.hours;
+        const timeB = b.days * 24 + b.hours;
+        return timeA - timeB;
+    });
+
+    sortedList.forEach(item => {
         html += `
 <div onclick="location.href='${item.link}'" class="tweet-card">
     <div>
@@ -369,6 +376,7 @@ function renderMsg() {
 </div>
         `;
     });
+
     wrap.innerHTML = html;
 }
 window.onload = renderMsg;

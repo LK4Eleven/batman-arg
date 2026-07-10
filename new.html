@@ -1,1 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人主页</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    background:#ffffff;
+    color:#000000;
+    font-family:system-ui,-apple-system,sans-serif;
+    max-width:600px;
+    margin:0 auto;
+    border-left:1px solid #eee;
+    border-right:1px solid #eee;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+a{
+    color:inherit;
+    text-decoration:none;
+}
+/* 顶部个人信息栏 */
+.profile-header{
+    padding:16px;
+    border-bottom:1px solid #eeeeee;
+}
+.avatar{
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    background:url("images/user.jpg") center/cover;
+    margin-bottom:10px;
+}
+.username{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:4px;
+}
+.user-id{
+    color:#777777;
+    margin-bottom:12px;
+}
+/* 推文Tab切换 */
+.tab-wrap{
+    display:flex;
+    border-bottom:1px solid #eeeeee;
+}
+.tab-item{
+    flex:1;
+    text-align:center;
+    padding:14px 0;
+    color:#777;
+    cursor:pointer;
+    position:relative;
+}
+.tab-item.active{
+    color:#000;
+}
+.tab-item.active::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:50px;
+    height:4px;
+    background:#1d9bf0;
+    border-radius:2px;
+}
+/* 信息流容器 自适应高度不留空白 */
+.feed-box{
+    overflow-y:auto;
+    flex:1;
+}
+/* 单条推文卡片 整块可点击 */
+.tweet-card{
+    padding:14px 16px;
+    border-bottom:1px solid #eeeeee;
+    display:flex;
+    gap:12px;
+    cursor:pointer;
+}
+.tweet-card:hover{
+    background:#f7f7f7;
+}
+.tweet-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:url("images/default.jpg") center/cover;
+    flex-shrink:0;
+}
+.tweet-content{
+    flex:1;
+}
+.tweet-name-row{
+    display:flex;
+    gap:6px;
+    align-items:center;
+    margin-bottom:6px;
+}
+.tweet-name{
+    font-weight:bold;
+}
+.tweet-tag{
+    color:#777777;
+}
+.tweet-text{
+    line-height:1.5;
+    font-size:15px;
+    color:#222222;
+}
+/* 板块默认隐藏，active才显示 */
+.tab-panel{
+    display:none;
+}
+.tab-panel.show{
+    display:block;
+}
+</style>
+</head>
+<body>
+    <a onclick="location.href='index.html'" style="display:inline-block;color:#990000;text-decoration:none;font-size:18px;padding:12px 16px;">← 返回</a>
+<!-- 个人资料头部 头像+名字可点进自己主页 -->
+<div class="profile-header">
+    <a href="new.html">
+        <div class="avatar"></div>
+    </a>
+    <a href="new.html" class="username">UHGURELQ</a>
+    <br>
+    <a href="new.html" class="user-id">@youneverfindme</a>
+    <p>个人主页</p>
+</div>
+
+<!-- Tab栏：帖子、回复、媒体 三等分 -->
+<div class="tab-wrap">
+    <div class="tab-item active" data-tab="post">帖子</div>
+    <div class="tab-item" data-tab="reply" style="color:#bbbbbb;">回复</div>
+    <div class="tab-item" data-tab="media" style="color:#bbbbbb;">媒体</div>
+</div>
+
+<!-- 可上下滑动信息流区域 -->
+<div class="feed-box">
+  <!-- 帖子面板 -->
+<div onclick="location.href='这里填详情页文件名.html'" class="tweet-card">
+    <div>
+        <div onclick="event.stopPropagation();location.href='new.html'" class="tweet-avatar" style="background:url('images/drake.jpg') center/cover;"></div>
+    </div>
+    <div class="tweet-content">
+        <div class="tweet-name-row">
+            <span onclick="event.stopPropagation();location.href='new.html'" class="tweet-name">UHGURELQ</span>
+            <span class="tweet-tag">@youneverfindme · 发布时间</span>
+        </div>
+        <div class="tweet-text">
+帖子正文内容
+<!-- 如需图片加下面一行 -->
+<br>
+<img src="图片路径" style="max-width:100%;margin-top:10px;border-radius:4px;">
+        </div>
+    </div>
+</div>
+
+
+    <!-- 回复面板 -->
+    <div class="tab-panel" id="reply">
+        <div style="padding:40px 20px;text-align:center;color:#999;font-size:15px;">
+由用户设置私密可见，你无权访问
+        </div>
+    </div>
+
+    <!-- 媒体面板 已替换提示文案 -->
+    <div class="tab-panel" id="media">
+        <div style="padding:40px 20px;text-align:center;color:#999;font-size:15px;">
+由用户设置私密可见，你无权访问
+        </div>
+    </div>
+</div>
+
+<script>
+// 标签页切换逻辑
+const tabs = document.querySelectorAll('.tab-item');
+const panels = document.querySelectorAll('.tab-panel');
+tabs.forEach(tab => {
+    tab.onclick = function(){
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('show'));
+        this.classList.add('active');
+        const targetId = this.getAttribute('data-tab');
+        document.getElementById(targetId).classList.add('show');
+    }
+})
+</script>
+</body>
+</html>
 

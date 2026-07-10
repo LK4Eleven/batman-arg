@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>私信对话</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    max-width:600px;
+    margin:0 auto;
+    border-left:1px solid #eee;
+    border-right:1px solid #eee;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+.back{
+    padding:12px 16px;
+    font-size:18px;
+    color:#1d9bf0;
+    text-decoration:none;
+    display:block;
+}
+.head{
+    padding:14px 16px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+.ava{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:url("images/RR.jpg") center/cover;
+    cursor:pointer;
+}
+.info .n{
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
+.info .id{
+    font-size:13px;
+    color:#777;
+}
+.box{
+    flex:1;
+    padding:16px;
+}
+/* 对方发来的消息 灰色左气泡 */
+.other{
+    background:#f1f1f1;
+    padding:10px 12px;
+    border-radius:12px 12px 12px 4px;
+    max-width:85%;
+    margin-bottom:12px;
+    line-height:1.6;
+    white-space:pre-line;
+}
+/* 玩家自己发送的消息 蓝色右气泡 */
+.me{
+    margin-left:auto;
+    background:#1d9bf0;
+    color:#fff;
+    padding:10px 12px;
+    border-radius:12px 12px 4px 12px;
+    max-width:85%;
+    margin-bottom:12px;
+    text-align:right;
+    white-space:pre-line;
+}
+.time-divider{
+    text-align:center;
+    color:#aaa;
+    font-size:14px;
+    margin:16px 0;
+}
+</style>
+</head>
+<body>
+<!-- 返回：玩家通讯消息列表页 home.html#message -->
+<a class="back" href="home.html#message">←</a>
+
+<div class="head">
+    <!-- 头像点击跳转对方主页 new.html -->
+    <div class="ava" onclick="location.href='RRFP.html'"></div>
+    <div class="info">
+        <div class="n" onclick="location.href='new.html'">RedRobin Station</div>
+        <div class="id">@Fan_RedRobin</div>
+    </div>
+</div>
+
+<div class="box">
+  <div class="time-divider">十一月前</div>
+    <!-- 对方第一条 -->
+    <div class="other">今天红罗宾在化工厂歼灭稻草人计划，我抓拍到了他从屋顶上滑下来的照片</div>
+    <!-- 下面可以继续追加 .other（对方） / .me（你） 对话 -->
+   <div class="other">发你邮箱里了。</div>  
+    <div class="me">收到。钱打过去了。</div> 
+  <div class="time-divider">七月前</div>
+   <div class="other">有人说在挪威有RR的身影，他在干什么</div>  
+   <div class="me">我调查一下</div> 
+   <div class="me">线人说是跨国贩毒。得到几张照片，我发我主页里了</div> 
+   <div class="other">看到了，当你线人要拿多少钱？</div>  
+    <div class="time-divider">六月前</div>
+  <div class="other">RR在瑞士的照片，老规矩</div>
+  <div class="me">钱打过去了。</div> 
+   <div class="time-divider">四月前</div>
+  <div class="other">RR又回到哥谭了</div>  
+  <div class="other">他和夜翼的照片，这个加价</div> 
+  <div class="me">钱打过去了。</div> 
+   <div class="time-divider">三月前</div>
+   <div class="other">我听说关于你一些不好的消息啊</div> 
+    <div class="me">我们有合同的，你记得吧。</div> 
+  <div class="other">开个玩笑。毕竟你是哥谭新闻提供照片的当下红人，我可不想死</div>
+   <div class="me">我不知道你在说什么</div>
+   <div class="other">放松。我从RR粉丝里买到的一手资料，在意大利。</div> 
+   <div class="me">你"骗"来的资料。你和我没差多少。</div> 
+  <div class="other">呵呵，也许吧。</div> 
+ <div class="time-divider">一月前</div>
+      <div class="me">RR这次在哥谭的照片我有了</div>
+  <div class="other">账号</div> 
+  <div class="me">我知道。这个月钱打过去了</div> 
+  <div class="other">我收到了。</div> 
+</div>
+</body>
+</html>
 

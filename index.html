@@ -275,16 +275,15 @@ batSubmitBtn.onclick = function(){
         return;
     }
         // 匹配凯撒密文UHGURELQ 或中文红罗宾，大小写兼容模糊匹配
-    if(userText.toUpperCase().includes("UHGURELQ")  &&  userText.includes("红罗宾")){
-        showAchievement();
-        return;
-    }
+   // 必须包含密文UHGURELQ，同时再包含【红罗宾】或【REDROBIN】其中任意一个，大小写全部兼容
+if (
+    userText.toUpperCase().includes("UHGURELQ")
+    && (userText.includes("红罗宾") || userText.toUpperCase().includes("REDROBIN"))
+) {
+    showAchievement();
+    return;
+}
 
-    // 匹配UHGURELQ 弹出成就，不跳转页面
-    if(userText.toUpperCase().includes("UHGURELQ")){
-        showAchievement();
-        return;
-    }
     if(userText.includes("布鲁斯") && userText.includes("蝙蝠侠")){
         warnCount += 1;
         localStorage.setItem("warnCount", warnCount);
